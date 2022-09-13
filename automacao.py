@@ -20,11 +20,11 @@ url_abrir = 'https://conectividadesocialv2.caixa.gov.br/sicns/?token=eyJ0eXAiOiJ
 chrome.get(url_abrir)
 
 
+### Try para caso de erro ###
 def error():
     messagebox.showerror(title="Extensão não suportada", message="Favor escolha um arquivo .xlsx")
 
-    ### parte funcional ###
-
+### parte funcional ###
 
 def iniciar_aut():
     arquivo = filedialog.askopenfilename()
