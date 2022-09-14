@@ -15,7 +15,7 @@ from tkinter import messagebox
 
 ### Inicia o navegador ###
 
-chrome = webdriver.Chrome(executable_path='chromedriver.exe')
+chrome = webdriver.Chrome()
 url_abrir = 'https://conectividadesocialv2.caixa.gov.br/sicns/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOnsidHBJbnNjcmljYW8iOiIxIiwiY29kaWdvU2VyaWFsIjoiMDAwMDAwMDAyNDYxNjg2RTlENjVCOEYzRDlGRTI0QjREQzFDQzE3OCIsImNvZFNlcmlhbEhleGFJbnZlcnQiOiI3OEMxMUNEQ0I0MjRGRUQ5RjNCODY1OUQ2RTY4NjEyNCIsInJhemFvU29jaWFsIjoiVkFMRSBWRVJERSBFTVBSRUVORElNRU5UT1MgQUdSSUNPTEFTIExUREEgRU0gUkVDVSIsImluc2NyaWNhbyI6IjAyNDE0ODU4MDAwMTI4IiwicmVzcG9uc2F2ZWwiOiJFRFVBUkRPIEpPU0UgREUgRkFSSUFTIiwiY3BmUmVzcG9uc2F2ZWwiOiIxNzQ2OTQyMjQwNCIsImNvZGlnb0NlcnRpZmljYWRvIjpudWxsLCJjZXJ0IjpudWxsfSwiY3JlYXRlZCI6MTY1MjcwMDAxMjU3MiwiZXhwIjoxNjUyNzA0ODEyfQ.bvf9Zvcdwoxp9y74xBTeDbFJpBQLmnkPvEZo0plx-wo'
 chrome.get(url_abrir)
 
@@ -43,8 +43,7 @@ def iniciar_aut():
 
         chrome.execute_script("window.history.go(-1)")
 
-        ### interface gráfica ###
-
+### interface gráfica ###
 
 # Definição da Janela
 janela_aut = Tk()
