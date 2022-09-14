@@ -73,3 +73,5 @@ bt_iniciar.place(width=68, height=40, x=295, y=180)
 bt_selecionar = Button(janela_aut, image=bot_fund, command=selecionar_arquivo)
 bt_selecionar.place(width=68, height=40, x=195, y=180)
 janela_aut.mainloop()
+
+#teste bobo#
