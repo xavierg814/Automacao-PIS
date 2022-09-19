@@ -15,7 +15,7 @@ from tkinter import messagebox
 
 ### Inicia o navegador ###
 
-chrome = webdriver.Chrome()
+chrome = webdriver.Chrome("Automacao-PIS/chromedriver.exe")
 url_abrir = 'https://conectividadesocialv2.caixa.gov.br/sicns/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOnsidHBJbnNjcmljYW8iOiIxIiwiY29kaWdvU2VyaWFsIjoiMDAwMDAwMDAyNDYxNjg2RTlENjVCOEYzRDlGRTI0QjREQzFDQzE3OCIsImNvZFNlcmlhbEhleGFJbnZlcnQiOiI3OEMxMUNEQ0I0MjRGRUQ5RjNCODY1OUQ2RTY4NjEyNCIsInJhemFvU29jaWFsIjoiVkFMRSBWRVJERSBFTVBSRUVORElNRU5UT1MgQUdSSUNPTEFTIExUREEgRU0gUkVDVSIsImluc2NyaWNhbyI6IjAyNDE0ODU4MDAwMTI4IiwicmVzcG9uc2F2ZWwiOiJFRFVBUkRPIEpPU0UgREUgRkFSSUFTIiwiY3BmUmVzcG9uc2F2ZWwiOiIxNzQ2OTQyMjQwNCIsImNvZGlnb0NlcnRpZmljYWRvIjpudWxsLCJjZXJ0IjpudWxsfSwiY3JlYXRlZCI6MTY1MjcwMDAxMjU3MiwiZXhwIjoxNjUyNzA0ODEyfQ.bvf9Zvcdwoxp9y74xBTeDbFJpBQLmnkPvEZo0plx-wo'
 chrome.get(url_abrir)
 
@@ -24,11 +24,16 @@ chrome.get(url_abrir)
 def error():
     messagebox.showerror(title="Extensão não suportada", message="Favor escolha um arquivo .xlsx")
 
-### parte funcional ###
+### parte da seleção do arquivo ###
+
+def selecionar_arquivo():
+    global arquivo
+    arquivo = filedialog.askopenfilename() # o Arquivo deve conter no minimo mais de uma coluna, sendo que a coluna que será pesquisada deve se chamar "PIS"
+
+### parte da Automação ###
 
 def iniciar_aut():
-    arquivo = filedialog.askopenfilename()
-
+    
     df = pd.read_excel(arquivo)
     df.dropna(subset=['PIS'], inplace=True)
 
@@ -52,8 +57,9 @@ janela_aut.geometry("663x220+610+153")
 janela_aut.resizable(width=1, height=1)
 
 # Import imagens
-img_fundo = PhotoImage(file='img_fundo2.png')
-bot_fund = PhotoImage(file='bot_fundo.png')
+img_fundo = PhotoImage(file='Automacao-PIS/img_fundo2.png')
+bot_fund = PhotoImage(file='Automacao-PIS/bot_fundo.png')
+bot_iniciar = PhotoImage(file='Automacao-PIS/bot_iniciar.png')
 
 # Labels
 lab_fundo = Label(janela_aut, image=img_fundo)
@@ -62,7 +68,9 @@ lab_fundo.pack()
 # Caixa de Erro e Aviso
 
 # criação do botão
-bt_iniciar = Button(janela_aut, image=bot_fund, command=iniciar_aut)
+bt_iniciar = Button(janela_aut, image=bot_iniciar, command=iniciar_aut)
 bt_iniciar.place(width=68, height=40, x=295, y=180)
 
+bt_selecionar = Button(janela_aut, image=bot_fund, command=selecionar_arquivo)
+bt_selecionar.place(width=68, height=40, x=195, y=180)
 janela_aut.mainloop()
