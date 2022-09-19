@@ -15,7 +15,7 @@ from tkinter import messagebox
 
 ### Inicia o navegador ###
 
-chrome = webdriver.Chrome()
+chrome = webdriver.Chrome("Versão para teste/chromedriver.exe")
 url_abrir = 'https://forms.gle/biofPp1SwfdThVrc9'
 chrome.get(url_abrir)
 
@@ -24,10 +24,15 @@ chrome.get(url_abrir)
 def error():
     messagebox.showerror(title="Extensão não suportada", message="Favor escolha um arquivo .xlsx")
 
-### parte funcional ###
+### parte da seleção do arquivo ###
+
+def selecionar_arquivo():
+    global arquivo
+    arquivo = filedialog.askopenfilename() # o Arquivo deve conter no minimo mais de uma coluna, sendo que a coluna que será pesquisada deve se chamar "PIS"
+
+### parte da Automacação###
 
 def iniciar_aut():
-    arquivo = "Teste.xlsx"
 
     df = pd.read_excel(arquivo)
     df.dropna(subset=['PIS'], inplace=True)
@@ -52,8 +57,8 @@ janela_aut.geometry("663x220+610+153")
 janela_aut.resizable(width=1, height=1)
 
 # Import imagens
-img_fundo = PhotoImage(file='img_fundo2.png')
-bot_fund = PhotoImage(file='bot_fundo.png')
+img_fundo = PhotoImage(file='Versão para teste/img_fundo2.png')
+bot_fund = PhotoImage(file='Versão para teste/bot_fundo.png')
 
 # Labels
 lab_fundo = Label(janela_aut, image=img_fundo)
@@ -65,4 +70,8 @@ lab_fundo.pack()
 bt_iniciar = Button(janela_aut, image=bot_fund, command=iniciar_aut)
 bt_iniciar.place(width=68, height=40, x=295, y=180)
 
+bt_selecionar = Button(janela_aut, image=bot_fund, command=selecionar_arquivo)
+bt_selecionar.place(width=68, height=40, x=195, y=180)
 janela_aut.mainloop()
+
+#teste bobo#
