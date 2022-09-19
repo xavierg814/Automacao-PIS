@@ -43,9 +43,12 @@ def iniciar_aut():
         elemento_PIS = chrome.find_element(By.XPATH, '//*[@id="txtPIS"]')
         elemento_botao = chrome.find_element(By.XPATH, '/html/body/form/table[2]/tbody/tr[2]/td[3]/table[3]/tbody/tr[9]/td/a[1]/img')  # Elemento que seleciona o XPATH do botão
 
+        elemento_PIS.clear
+        time.sleep(1)
         elemento_PIS.send_keys(row["PIS"])
         elemento_botao.click()
 
+        time.sleep(3)
         chrome.execute_script("window.history.go(-1)")
 
 ### interface gráfica ###
