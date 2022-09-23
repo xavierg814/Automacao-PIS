@@ -15,9 +15,9 @@ from tkinter import messagebox
 
 ### Inicia o navegador ###
 
-chrome = webdriver.Chrome("Automacao-PIS/chromedriver.exe")
+ie = webdriver.Ie("IEDriverServer.exe")
 url_abrir = 'https://conectividadesocialv2.caixa.gov.br/sicns/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOnsidHBJbnNjcmljYW8iOiIxIiwiY29kaWdvU2VyaWFsIjoiMDAwMDAwMDAyNDYxNjg2RTlENjVCOEYzRDlGRTI0QjREQzFDQzE3OCIsImNvZFNlcmlhbEhleGFJbnZlcnQiOiI3OEMxMUNEQ0I0MjRGRUQ5RjNCODY1OUQ2RTY4NjEyNCIsInJhemFvU29jaWFsIjoiVkFMRSBWRVJERSBFTVBSRUVORElNRU5UT1MgQUdSSUNPTEFTIExUREEgRU0gUkVDVSIsImluc2NyaWNhbyI6IjAyNDE0ODU4MDAwMTI4IiwicmVzcG9uc2F2ZWwiOiJFRFVBUkRPIEpPU0UgREUgRkFSSUFTIiwiY3BmUmVzcG9uc2F2ZWwiOiIxNzQ2OTQyMjQwNCIsImNvZGlnb0NlcnRpZmljYWRvIjpudWxsLCJjZXJ0IjpudWxsfSwiY3JlYXRlZCI6MTY1MjcwMDAxMjU3MiwiZXhwIjoxNjUyNzA0ODEyfQ.bvf9Zvcdwoxp9y74xBTeDbFJpBQLmnkPvEZo0plx-wo'
-chrome.get(url_abrir)
+ie.get(url_abrir)
 
 
 ### Try para caso de erro ###
@@ -40,8 +40,8 @@ def iniciar_aut():
     for index, row in df.iterrows():
         time.sleep(5)
 
-        elemento_PIS = chrome.find_element(By.XPATH, '//*[@id="txtPIS"]')
-        elemento_botao = chrome.find_element(By.XPATH, '/html/body/form/table[2]/tbody/tr[2]/td[3]/table[3]/tbody/tr[9]/td/a[1]/img')  # Elemento que seleciona o XPATH do botão
+        elemento_PIS = ie.find_element(By.XPATH, '//*[@id="txtPIS"]')
+        elemento_botao = ie.find_element(By.XPATH, '/html/body/form/table[2]/tbody/tr[2]/td[3]/table[3]/tbody/tr[9]/td/a[1]/img')  # Elemento que seleciona o XPATH do botão
 
         elemento_PIS.clear
         time.sleep(1)
@@ -49,7 +49,7 @@ def iniciar_aut():
         elemento_botao.click()
 
         time.sleep(3)
-        chrome.execute_script("window.history.go(-1)")
+        ie.execute_script("window.history.go(-1)")
 
 ### interface gráfica ###
 
