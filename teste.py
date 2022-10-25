@@ -31,7 +31,7 @@ def iniciar_aut():
             pagina.goto("https://forms.gle/biofPp1SwfdThVrc9")
             caixa_entrada = pagina.locator(f"xpath={xpath_input}")
             expect(caixa_entrada).to_be_visible
-            caixa_entrada.fill(preencher)
+            caixa_entrada.fill(str(preencher))
             botao = pagina.locator(f"xpath={xpath_button}")
 
 

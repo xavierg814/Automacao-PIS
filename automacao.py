@@ -13,8 +13,6 @@ from tkinter import filedialog
 from tkinter import messagebox
 from selenium.common.exceptions import *
 
-### Transforma em .exe ###
-
 ### Inicia o navegador ###
 try:
     chrome = webdriver.Chrome("chromedriver.exe")
