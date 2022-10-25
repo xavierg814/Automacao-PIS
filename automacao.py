@@ -24,12 +24,6 @@ except SessionNotCreatedException as erro:
     print("Versão do Drivre está incorreta, favor atualizar driver dentro da pasta da automação")
     messagebox.showerror("Erro", "Versão do chromedrive é incompativél com a versão atual do chrome, favor verificar sua ver~sao do chrome e atualize o chromedriver")
 
-
-
-### Try para caso de erro ###
-def error():
-    messagebox.showerror(title="Extensão não suportada", message="Favor escolha um arquivo .xlsx")
-
 ### parte da seleção do arquivo ###
 
 def selecionar_arquivo():
