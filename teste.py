@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 from playwright.sync_api import sync_playwright
+from playwright.sync_api import Error
 import pandas as pd
 from tkinter import *
 from tkinter import filedialog
@@ -14,27 +15,37 @@ xpath_button = '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span'
 def selecionar_arquivo():
     global arquivo 
     arquivo = filedialog.askopenfilename()
+    
 
 ### Automação ###
 
 def iniciar_aut():
     global caixa_entrada
     global botao
-    df = pd.read_excel(arquivo)
-    df.dropna(subset=['PIS'], inplace=True)
+    try:
+        df = pd.read_excel(arquivo)
+        df.dropna(subset=['PIS'], inplace=True)
+    except ValueError as error:
+        print("favor selecione um arquivo excel válido (.xlsx)")
+        messagebox.showerror("ERRO", "Favor selecione um arquivo excel válido (.xlsx)")
+    except KeyError as error:
+        print('Planilha selecionanda não contém a coluna PIS ou contém um filtro nela, favor verificar a planilha e tentar novamente')
+        messagebox.showerror("ERRO", "Planilha selecionanda não contém a coluna PIS ou contém um filtro nela, favor verificar a planilha e tentar novamente")
 
     for index, row in df.iterrows():
         with sync_playwright() as p:
-            preencher = row["PIS"]
-            navegador = p.chromium.launch(headless=False) 
-            pagina = navegador.new_page()
-            pagina.goto("https://forms.gle/biofPp1SwfdThVrc9")
-            caixa_entrada = pagina.locator(f"xpath={xpath_input}")
-            expect(caixa_entrada).to_be_visible
-            caixa_entrada.fill(str(preencher))
-            botao = pagina.locator(f"xpath={xpath_button}")
-
-
+            try:
+                preencher = row["PIS"]
+                navegador = p.chromium.launch(headless=False) 
+                pagina = navegador.new_page()
+                pagina.goto("https://forms.gle/biofPp1SwfdThVrc9")
+                caixa_entrada = pagina.locator(f"xpath={xpath_input}")
+                expect(caixa_entrada).to_be_visible
+                caixa_entrada.fill(str(preencher))
+                botao = pagina.locator(f"xpath={xpath_button}")
+            except Error as erro:
+                print("Pagina alvo fechada, favor reabra a automação")
+                messagebox.showerror("ERRO", "Pagina alvo fechada, favor reabra a automação")
 ### interface gráfica ###
 
 # Definição da Janela
